@@ -4,23 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Personal Developer Portfolio of Harsh Kumar - B.Tech CSE Student (3rd Sem) at Jaypee University Anoopshahr.">
+  <meta name="theme-color" content="#F8F7F4">
   <title>Harsh Kumar | Developer Portfolio</title>
+
+  <!-- Fonts: display (Space Grotesk), body (Inter), code (JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
+
+  <!-- Lets CSS know scripts are available, so scroll-reveal styles only apply then -->
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+
+  <a href="#hero" class="skip-link">Skip to content</a>
+
+  <!-- ==========================================
+       DECORATIVE BACKGROUND (soft colour washes)
+       ========================================== -->
+  <div class="page-fx" aria-hidden="true">
+    <span class="orb orb--violet"></span>
+    <span class="orb orb--cyan"></span>
+    <span class="orb orb--deep"></span>
+  </div>
 
   <!-- ==========================================
        1. NAVIGATION BAR
        ========================================== -->
   <header class="header">
-    <nav class="navbar container">
+    <nav class="navbar container" aria-label="Main navigation">
       <!-- Logo / Brand -->
       <a href="#hero" class="nav-logo">
         <span class="logo-bracket">&lt;</span>Harsh<span class="logo-accent">.dev</span><span class="logo-bracket"> /&gt;</span>
       </a>
 
-      <!-- Navigation Links -->
-      <ul class="nav-links">
+      <!-- Navigation Links (becomes a slide-in drawer on mobile) -->
+      <ul class="nav-links" id="primary-navigation">
         <li><a href="#hero" class="nav-link active">Home</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -32,8 +53,16 @@
       <div class="nav-action">
         <a href="#resume" class="btn btn-outline nav-btn">Resume</a>
       </div>
+
+      <!-- Mobile menu toggle -->
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
     </nav>
   </header>
+  <div class="nav-backdrop" aria-hidden="true"></div>
 
   <!-- ==========================================
        MAIN CONTENT CONTAINER
@@ -44,36 +73,47 @@
          ========================================== -->
     <section id="hero" class="hero-section">
       <div class="container hero-container">
-        
+
         <!-- Left: Text Content -->
         <div class="hero-content">
           <!-- Availability Badge -->
-          <div class="hero-badge">
+          <div class="hero-badge hero-anim" data-step="1">
             <span class="badge-dot"></span>
-            <span class="badge-text">Available for internships & projects</span>
+            <span class="badge-text">Available for internships &amp; projects</span>
           </div>
 
           <!-- Titles & Intro -->
-          <h1 class="hero-title">
+          <h1 class="hero-title hero-anim" data-step="2">
             Hi, I'm <span class="highlight-text">Harsh Kumar</span>
           </h1>
-          <h2 class="hero-tagline">
-            B.Tech CSE Student (3rd Sem) & Aspiring Software Engineer
+          <h2 class="hero-tagline hero-anim" data-step="3">
+            B.Tech CSE Student (3rd Sem) &amp; Aspiring Software Engineer
           </h2>
-          <p class="hero-description">
-            Computer Science student at Jaypee University Anoopshahr building practical web applications 
-            and practicing Data Structures & Algorithms. Focused on C++, modern web tech, and database design.
+
+          <!-- Typewriter line for roles -->
+          <p class="hero-roles hero-anim" data-step="3">
+            <span class="roles-label">&gt;_ I build </span><span class="typewriter" data-roles="responsive web apps|student productivity tools|clean, accessible interfaces|data-structure driven solutions">responsive web apps</span>
+          </p>
+
+          <p class="hero-description hero-anim" data-step="4">
+            Computer Science student at Jaypee University Anoopshahr building practical web applications
+            and practicing Data Structures &amp; Algorithms. Focused on C++, modern web tech, and database design.
           </p>
 
           <!-- Call To Action (CTA) Buttons -->
-          <div class="hero-cta-group">
+          <div class="hero-cta-group hero-anim" data-step="5">
             <a href="#projects" class="btn btn-primary">View Projects</a>
             <a href="#contact" class="btn btn-secondary">Contact Me</a>
           </div>
+
+          <a href="#about" class="scroll-cue hero-anim" data-step="6">
+            <span class="scroll-cue-line" aria-hidden="true"></span>
+            Scroll to explore
+          </a>
         </div>
 
         <!-- Right: Developer Visual Element (Pure CSS Code Card) -->
-        <div class="hero-visual">
+        <div class="hero-visual hero-anim" data-step="4">
           <div class="code-card">
             <!-- Window Titlebar with Mac-style controls -->
             <div class="code-card-header">
@@ -109,9 +149,9 @@
          ========================================== -->
     <section id="about" class="about-section section">
       <div class="container">
-        
+
         <!-- Section Header -->
-        <div class="section-header">
+        <div class="section-header reveal-stagger">
           <span class="section-tag">// 01. Background</span>
           <h2 class="section-title">About Me</h2>
           <div class="section-divider"></div>
@@ -119,23 +159,23 @@
 
         <!-- About Content Grid -->
         <div class="about-grid">
-          
+
           <!-- Bio & Current Focus -->
           <div class="about-bio">
-            <h3 class="about-subtitle">Student & Aspiring Software Developer</h3>
-            <p class="about-text">
-              I am a passionate Computer Science student dedicated to building strong programming fundamentals 
-              and practical software. My core focus is on problem solving with <strong>C++ and Data Structures & Algorithms</strong>, 
+            <h3 class="about-subtitle reveal">Student &amp; Aspiring Software Developer</h3>
+            <p class="about-text reveal" style="--d: .08s">
+              I am a passionate Computer Science student dedicated to building strong programming fundamentals
+              and practical software. My core focus is on problem solving with <strong>C++ and Data Structures &amp; Algorithms</strong>,
               alongside crafting clean, accessible front-end interfaces with <strong>HTML5 and modern CSS3</strong>.
             </p>
-            <p class="about-text">
-              I enjoy bridging algorithmic thinking with hands-on development—whether that means optimizing a search algorithm 
-              or structuring relational schemas with <strong>SQL and MySQL</strong>. I believe in writing readable, maintainable 
+            <p class="about-text reveal" style="--d: .16s">
+              I enjoy bridging algorithmic thinking with hands-on development—whether that means optimizing a search algorithm
+              or structuring relational schemas with <strong>SQL and MySQL</strong>. I believe in writing readable, maintainable
               code and continuously learning by building real-world projects.
             </p>
 
             <!-- What I'm Currently Working On -->
-            <div class="focus-card">
+            <div class="focus-card reveal" style="--d: .24s">
               <h4 class="focus-title">
                 <span class="focus-icon">⚡</span> What I'm Currently Working On
               </h4>
@@ -147,63 +187,63 @@
             </div>
 
             <!-- CTA -->
-            <div class="about-action">
+            <div class="about-action reveal" style="--d: .32s">
               <a href="#projects" class="btn btn-primary">View My Projects</a>
             </div>
           </div>
 
           <!-- Learning Journey / Timeline Cards -->
           <div class="journey-container">
-            <h3 class="journey-heading">My Learning Journey</h3>
-            
+            <h3 class="journey-heading reveal">My Learning Journey</h3>
+
             <div class="timeline">
               <!-- Item 1: Education -->
-              <div class="timeline-card">
+              <div class="timeline-card reveal-left" style="--d: .05s">
                 <div class="timeline-badge">🎓</div>
                 <div class="timeline-content">
                   <span class="timeline-meta">Education (Present)</span>
                   <h4 class="timeline-title">B.Tech in Computer Science</h4>
                   <p class="timeline-desc">
-                    Focusing on core CS coursework including Data Structures, Object-Oriented Programming, 
+                    Focusing on core CS coursework including Data Structures, Object-Oriented Programming,
                     Database Management Systems, and Computer Networks.
                   </p>
                 </div>
               </div>
 
               <!-- Item 2: DSA Journey -->
-              <div class="timeline-card">
+              <div class="timeline-card reveal-left" style="--d: .15s">
                 <div class="timeline-badge">⚙️</div>
                 <div class="timeline-content">
                   <span class="timeline-meta">Problem Solving</span>
                   <h4 class="timeline-title">DSA Journey in C++</h4>
                   <p class="timeline-desc">
-                    Actively solving problems on LeetCode/GeeksforGeeks. Consistent practice across arrays, strings, 
+                    Actively solving problems on LeetCode/GeeksforGeeks. Consistent practice across arrays, strings,
                     linked lists, recursion, and search algorithms.
                   </p>
                 </div>
               </div>
 
               <!-- Item 3: Web Development Journey -->
-              <div class="timeline-card">
+              <div class="timeline-card reveal-left" style="--d: .25s">
                 <div class="timeline-badge">🌐</div>
                 <div class="timeline-content">
                   <span class="timeline-meta">Web Development</span>
                   <h4 class="timeline-title">Frontend Foundations</h4>
                   <p class="timeline-desc">
-                    Mastering HTML5 semantics, CSS Grid, Flexbox, and responsive principles. Next milestone: 
+                    Mastering HTML5 semantics, CSS Grid, Flexbox, and responsive principles. Next milestone:
                     JavaScript DOM manipulation and React components.
                   </p>
                 </div>
               </div>
 
               <!-- Item 4: Current Learning -->
-              <div class="timeline-card">
+              <div class="timeline-card reveal-left" style="--d: .35s">
                 <div class="timeline-badge">🚀</div>
                 <div class="timeline-content">
                   <span class="timeline-meta">Current Horizon</span>
-                  <h4 class="timeline-title">Databases & Full-Stack</h4>
+                  <h4 class="timeline-title">Databases &amp; Full-Stack</h4>
                   <p class="timeline-desc">
-                    Learning relational database modeling with SQL and MySQL, preparing to transition static frontends 
+                    Learning relational database modeling with SQL and MySQL, preparing to transition static frontends
                     into dynamic full-stack applications.
                   </p>
                 </div>
@@ -222,11 +262,11 @@
          ========================================== -->
     <section id="skills" class="skills-section section">
       <div class="container">
-        
+
         <!-- Section Header -->
-        <div class="section-header">
+        <div class="section-header reveal-stagger">
           <span class="section-tag">// 02. Expertise</span>
-          <h2 class="section-title">Skills & Technologies</h2>
+          <h2 class="section-title">Skills &amp; Technologies</h2>
           <div class="section-divider"></div>
           <p class="section-lead">
             A realistic overview of the tools, languages, and core concepts I actively practice and use in my projects.
@@ -235,9 +275,9 @@
 
         <!-- Skills Grid -->
         <div class="skills-grid">
-          
+
           <!-- 1. Programming Languages -->
-          <div class="skill-category-card">
+          <div class="skill-category-card reveal" style="--d: .05s">
             <div class="category-header">
               <span class="category-icon">💻</span>
               <h3 class="category-title">Programming</h3>
@@ -250,7 +290,7 @@
           </div>
 
           <!-- 2. Web Development -->
-          <div class="skill-category-card">
+          <div class="skill-category-card reveal" style="--d: .13s">
             <div class="category-header">
               <span class="category-icon">🌐</span>
               <h3 class="category-title">Web Development</h3>
@@ -265,7 +305,7 @@
           </div>
 
           <!-- 3. Database -->
-          <div class="skill-category-card">
+          <div class="skill-category-card reveal" style="--d: .21s">
             <div class="category-header">
               <span class="category-icon">🗄️</span>
               <h3 class="category-title">Database</h3>
@@ -278,10 +318,10 @@
           </div>
 
           <!-- 4. Tools & Workflow -->
-          <div class="skill-category-card">
+          <div class="skill-category-card reveal" style="--d: .29s">
             <div class="category-header">
               <span class="category-icon">🛠️</span>
-              <h3 class="category-title">Tools & Workflow</h3>
+              <h3 class="category-title">Tools &amp; Workflow</h3>
             </div>
             <p class="category-description">Version control, collaboration, and development environment.</p>
             <div class="skill-tags">
@@ -292,10 +332,10 @@
           </div>
 
           <!-- 5. Data Structures & Algorithms -->
-          <div class="skill-category-card skill-card-wide">
+          <div class="skill-category-card skill-card-wide reveal" style="--d: .37s">
             <div class="category-header">
               <span class="category-icon">🧠</span>
-              <h3 class="category-title">Data Structures & Algorithms</h3>
+              <h3 class="category-title">Data Structures &amp; Algorithms</h3>
             </div>
             <p class="category-description">Core computational problem-solving patterns and data structures practiced regularly.</p>
             <div class="skill-tags">
@@ -303,7 +343,7 @@
               <span class="skill-tag">Strings</span>
               <span class="skill-tag">Linked Lists</span>
               <span class="skill-tag">Binary Search</span>
-              <span class="skill-tag">Stacks & Queues</span>
+              <span class="skill-tag">Stacks &amp; Queues</span>
               <span class="skill-tag">Trees</span>
               <span class="skill-tag">Recursion</span>
               <span class="skill-tag">Sorting Algorithms</span>
@@ -320,9 +360,9 @@
          ========================================== -->
     <section id="projects" class="projects-section section">
       <div class="container">
-        
+
         <!-- Section Header -->
-        <div class="section-header">
+        <div class="section-header reveal-stagger">
           <span class="section-tag">// 03. Portfolio</span>
           <h2 class="section-title">My Projects</h2>
           <div class="section-divider"></div>
@@ -333,9 +373,9 @@
 
         <!-- Single Project Container (Centered, responsive layout) -->
         <div class="projects-single-wrapper">
-          
+
           <!-- Project: Student Toolkit -->
-          <article class="project-card project-card-featured">
+          <article class="project-card project-card-featured reveal-scale">
             <!-- 1. Visual / Image Placeholder -->
             <div class="project-image-box">
               <div class="project-placeholder-visual project-visual-featured">
@@ -383,9 +423,9 @@
          ========================================== -->
     <section id="contact" class="contact-section section">
       <div class="container">
-        
+
         <!-- Section Header -->
-        <div class="section-header">
+        <div class="section-header reveal-stagger">
           <span class="section-tag">// 04. Get In Touch</span>
           <h2 class="section-title">Contact Me</h2>
           <div class="section-divider"></div>
@@ -395,27 +435,27 @@
         </div>
 
         <div class="contact-grid">
-          
+
           <!-- Left: Personal Contact Details -->
           <div class="contact-info">
-            <h3 class="contact-info-title">Let's Connect</h3>
-            <p class="contact-info-text">
-              I am currently pursuing my B.Tech in CSE at <strong>Jaypee University Anoopshahr</strong> (3rd Semester, 9.0 CGPA). 
+            <h3 class="contact-info-title reveal">Let's Connect</h3>
+            <p class="contact-info-text reveal" style="--d: .08s">
+              I am currently pursuing my B.Tech in CSE at <strong>Jaypee University Anoopshahr</strong> (3rd Semester, 9.0 CGPA).
               Feel free to reach out for software engineering internships, technical collaborations, or problem-solving discussions.
             </p>
 
             <div class="contact-cards">
-              <div class="contact-card">
+              <div class="contact-card reveal" style="--d: .14s">
                 <span class="contact-card-label">Direct Email</span>
                 <a href="mailto:guptaharsh90211@gmail.com" class="contact-card-link">guptaharsh90211@gmail.com</a>
               </div>
 
-              <div class="contact-card">
-                <span class="contact-card-label">Education & University</span>
+              <div class="contact-card reveal" style="--d: .2s">
+                <span class="contact-card-label">Education &amp; University</span>
                 <p class="contact-card-value">Jaypee University Anoopshahr (B.Tech CSE, 3rd Sem)</p>
               </div>
 
-              <div class="contact-card">
+              <div class="contact-card reveal" style="--d: .26s">
                 <span class="contact-card-label">Profiles</span>
                 <div class="contact-social-links">
                   <a href="https://github.com/Harshgupta90211" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">
@@ -430,7 +470,7 @@
           </div>
 
           <!-- Right: Contact Form -->
-          <div class="contact-form-card">
+          <div class="contact-form-card reveal" style="--d: .12s">
             <form id="contactForm" class="contact-form" action="https://formspree.io/f/xyekjodw" method="POST">
               <div class="form-group">
                 <label for="name" class="form-label">Your Name</label>
@@ -469,7 +509,7 @@
           <span class="logo-bracket">&lt;</span>Harsh<span class="logo-accent">.dev</span><span class="logo-bracket"> /&gt;</span>
         </a>
         <p class="footer-copyright">
-          &copy; 2026 Harsh Kumar. Built with semantic HTML5, CSS3, & Node.js REST API.
+          &copy; 2026 Harsh Kumar. Built with semantic HTML5, CSS3, &amp; Node.js REST API.
         </p>
       </div>
 
@@ -480,6 +520,9 @@
       </div>
     </div>
   </footer>
+
+  <!-- Interaction layer: nav drawer, scroll reveals, typewriter, cursor glow -->
+  <script src="script.js" defer></script>
 
   <script>
     (function () {
