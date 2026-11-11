@@ -1,4 +1,4 @@
- /* ==========================================================================
+/* ==========================================================================
    DEVELOPER PORTFOLIO - MAIN STYLESHEET (style.css)
    ========================================================================== */
 
@@ -67,6 +67,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -75,7 +77,26 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
+  width: 100%;
+  overflow-wrap: anywhere;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure responsive media scaling without overflow */
+img, video {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+/* Modern responsive typography balancing */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+p, li {
+  text-wrap: pretty;
 }
 
 /* Utility Container: centers content and restricts max width on wide screens */
@@ -163,6 +184,7 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 .navbar {
@@ -1113,7 +1135,7 @@ body {
    -------------------------------------------------------------------------- */
 .footer {
   border-top: 1px solid var(--border-color);
-  padding: 2.5rem 0;
+  padding: 2.5rem 0 max(2.5rem, env(safe-area-inset-bottom, 0px));
   background-color: #0b1120;
   margin-top: 2rem;
 }
@@ -1159,9 +1181,10 @@ body {
 /* --------------------------------------------------------------------------
    14. RESPONSIVE DESIGN (MEDIA QUERIES)
    Adapts layout cleanly across desktop (1200px+), tablet (768px-1199px),
-   and mobile (below 768px).
+   and mobile (below 768px down to 320px).
    -------------------------------------------------------------------------- */
-/* Tablet Breakpoint (768px to 1199px) */
+
+/* Tablet Landscape & Medium Desktops (up to 1024px) */
 @media (max-width: 1024px) {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1169,6 +1192,7 @@ body {
   }
 }
 
+/* Tablet Portrait & Small Laptops (up to 900px) */
 @media (max-width: 900px) {
   .hero-container {
     grid-template-columns: 1fr;
@@ -1193,6 +1217,7 @@ body {
   .code-card {
     text-align: left;
     margin: 0 auto;
+    max-width: 520px;
   }
 
   .about-grid {
@@ -1208,39 +1233,52 @@ body {
   .footer-container {
     flex-direction: column;
     text-align: center;
+    gap: 1.5rem;
+  }
+
+  .footer-right {
+    justify-content: center;
   }
 }
 
-/* Mobile Breakpoint (Below 768px) */
+/* Tablets & Mobile Devices (Below 768px) */
 @media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 
   .section {
     padding: 3.5rem 0;
   }
 
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
   .skills-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
   .skill-card-wide {
     grid-column: auto;
   }
 
+  /* Timeline mobile adjustments */
   .timeline {
-    margin-left: 0.25rem;
-    padding-left: 0.5rem;
+    margin-left: 0.5rem;
+    padding-left: 0;
+    border-left: 2px solid rgba(56, 189, 248, 0.35);
   }
 
   .timeline-card {
-    margin-left: 1rem;
-    padding: 1rem 1.25rem;
+    margin-left: 1.5rem;
+    padding: 1.15rem 1.25rem;
   }
 
   .timeline-badge {
-    left: -2.15rem;
+    left: -2.45rem;
     width: 28px;
     height: 28px;
     font-size: 0.75rem;
@@ -1256,41 +1294,308 @@ body {
   }
 }
 
-/* Small Mobile Screens */
+/* Standard Mobile Devices (Below 640px) */
 @media (max-width: 640px) {
+  /* Mobile Header / Navigation */
   .navbar {
     height: auto;
-    padding: 0.9rem 1rem;
+    padding: 0.8rem 1rem;
+    display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem;
+    align-items: center;
     justify-content: space-between;
+    row-gap: 0.65rem;
   }
 
-  /* Wrap nav links onto their own row neatly on small screens */
+  .nav-logo {
+    font-size: 1.15rem;
+  }
+
+  .nav-action {
+    display: flex;
+    align-items: center;
+  }
+
+  /* CRITICAL: Resume button must remain compact on mobile */
+  .nav-btn {
+    padding: 0.4rem 0.95rem;
+    font-size: 0.825rem;
+    min-height: 36px;
+    width: auto !important;
+  }
+
+  /* Horizontal touch-friendly scrollable pill menu */
   .nav-links {
     order: 3;
     width: 100%;
-    justify-content: center;
-    gap: 1.25rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.45rem;
     overflow-x: auto;
-    padding-top: 0.65rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.5rem 0.15rem 0.25rem;
     border-top: 1px solid var(--border-color);
   }
 
-  .nav-link {
-    font-size: 0.875rem;
+  .nav-links::-webkit-scrollbar {
+    display: none;
   }
 
+  .nav-link {
+    font-size: 0.825rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+  }
+
+  .nav-link.active,
+  .nav-link:hover {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.35);
+    color: var(--accent-cyan);
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  /* Hero Section */
   .hero-section {
-    padding: var(--space-xl) 0;
+    padding: 2.5rem 0 3rem;
+    min-height: auto;
+  }
+
+  .hero-title {
+    font-size: clamp(1.85rem, 6.5vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  .hero-tagline {
+    font-size: 1.05rem;
+    line-height: 1.45;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.75rem;
   }
 
   .hero-cta-group {
     flex-direction: column;
     width: 100%;
+    gap: 0.75rem;
   }
 
-  .btn {
+  /* Only hero call-to-actions take full width on mobile */
+  .hero-cta-group .btn {
     width: 100%;
+    min-height: 48px;
+    font-size: 0.95rem;
+  }
+
+  /* Code Preview Terminal Card */
+  .code-card {
+    max-width: 100%;
+    border-radius: var(--radius-md);
+  }
+
+  .code-card-header {
+    padding: 0.65rem 1rem;
+  }
+
+  .code-card-body {
+    padding: 1rem 1.15rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .code-card-body pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* About Section */
+  .about-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .about-text {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .focus-card {
+    padding: 1rem 1.15rem;
+  }
+
+  .about-action .btn {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  /* Skills Section */
+  .skill-category-card {
+    padding: 1.25rem 1.15rem;
+  }
+
+  .category-title {
+    font-size: 1.05rem;
+  }
+
+  .skill-tag {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.65rem;
+  }
+
+  /* Projects Section - Featured Student Toolkit Card */
+  .projects-single-wrapper {
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+
+  .project-card-featured {
+    max-width: 100%;
+  }
+
+  .project-card-featured .project-image-box {
+    height: 170px;
+  }
+
+  .placeholder-icon {
+    font-size: 1.85rem;
+  }
+
+  .placeholder-code {
+    font-size: 0.8rem;
+  }
+
+  .project-content {
+    padding: 1.25rem 1.15rem;
+  }
+
+  .project-title {
+    font-size: 1.2rem;
+  }
+
+  .project-description {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+
+  .project-tags {
+    gap: 0.35rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-tag {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.55rem;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 0.65rem;
+    width: 100%;
+  }
+
+  .project-links .btn {
+    flex: 1;
+    min-height: 44px;
+    font-size: 0.85rem;
+    padding: 0.65rem 0.5rem;
+    text-align: center;
+  }
+
+  /* Contact Section */
+  .contact-info-title {
+    font-size: 1.2rem;
+  }
+
+  .contact-info-text {
+    font-size: 0.95rem;
+  }
+
+  .contact-card {
+    padding: 0.95rem 1.15rem;
+  }
+
+  .contact-social-links .btn {
+    flex: 1;
+    min-height: 42px;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .contact-form-card {
+    padding: 1.25rem 1.15rem;
+  }
+
+  .form-input,
+  .form-textarea {
+    font-size: 16px; /* Prevents auto-zoom in iOS Safari */
+    min-height: 44px;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .form-submit-btn {
+    min-height: 48px;
+    font-size: 0.95rem;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 2rem 0 max(2rem, env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Extra Small Mobile Screens (320px - 380px, e.g. iPhone SE / Folded) */
+@media (max-width: 380px) {
+  .container {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .hero-title {
+    font-size: 1.7rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.95rem;
+  }
+
+  .project-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .contact-social-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .timeline-card {
+    margin-left: 1.25rem;
+    padding: 0.95rem 1rem;
+  }
+
+  .timeline-badge {
+    left: -2.2rem;
+    width: 26px;
+    height: 26px;
+    font-size: 0.7rem;
+  }
+
+  .code-card-body {
+    font-size: 0.75rem;
+    padding: 0.85rem;
   }
 }
